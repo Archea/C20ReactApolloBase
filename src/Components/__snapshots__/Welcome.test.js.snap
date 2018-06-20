@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome it at renders and matches snapshot 1`] = `"loading..."`;

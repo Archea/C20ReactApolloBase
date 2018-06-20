@@ -20,5 +20,14 @@
         }
       ]
     }
-  }
+  },
+  notes: "Adam Mason is going to help Gill on the UI prototype. Nitin and Jiten are going to be working on the OMA product. Add them all to teams channel.
+Also add Adam to the weekly meetings.
+Minimum Viable Product – our work should be prioritized by this – if anything is needed for #1 jump on it before jumping on to anything needed for #2 or #3:
+#1 - Focus our attention first on creating a tool that will help normalization.  User stories need to be created for this.
+#2 - Provide a tool that identifies which sections have had updates in the new version compared to an older version
+#3 – Provide a tool that stores simple nuggets as over rides for at least one scope (ability to add Project Scope language easily for building typology or code requirements. Ability to designate manufacturer choices by regional availability (scope). Ability to make global changes across all sections (or certain divisions))
+Dave is going to be on vacation for two weeks starting Sunday. Before he takes off, he will setup some security for the API end points that we have content 2.0. Any API utilized by SBC will be left alone – so we don’t break anything for the next go live before the A’18 event.  That API will also have security added post A’18 in coordination with the SBC schedule.
+(in prior meeting) we decided that we will start forming a 2 week sprint. Is it time for us to setup a sprint for the changes that Ben, Nitin, and Jiten are going to be working on?
+Anything else that we need to add?"
 }

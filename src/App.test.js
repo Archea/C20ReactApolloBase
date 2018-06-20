@@ -6,10 +6,9 @@ If you are getting an eroror like this:
     C:\dev\assemblies\node_modules\graphql\language\parser.mjs:10
     import { Source } from './source';
     ^^^^^^
-  its a problem with the tester trying to run the .mjs files that come in the graphql module, 
+  its a problem with the tester trying to run the .mjs files that come in the graphql module,
   easiest fix to just delete them after you've yarn install 'ed
 */
-
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -18,10 +17,18 @@ import { shallow, configure, mount } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 import Adapter from 'enzyme-adapter-react-16'
 import App from './App'
+import Header from './Components/Navigation/Header'
+import NotFound from './Components/Navigation/NotFound'
 
 configure({ adapter: new Adapter() })
 
-it('renders without crashing', () => {})
+it('renders without crashing', () => {
+  const wrapper = shallow(
+    <MemoryRouter initialEntries={['/random']}>
+      <App />
+    </MemoryRouter>
+  )
+})
 
 test('invalid path should redirect to 404', () => {
   const wrapper = shallow(
