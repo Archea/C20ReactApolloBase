@@ -4,13 +4,10 @@ export const resolvers = {
   Mutation: {
     setUser: (_, variables, { cache, getCacheKey }) => {
       const id = getCacheKey({ __typename: 'UserData', id: variables.id })
-      const fragment = gql`
-        fragment setId on FirmId {
-          id
-        }
-      `
-      const a = 'a'
-      return a
+      const error = {
+        error: { message: 'nobody implemented this' }
+      }
+      return error
     }
   }
 }
@@ -28,6 +25,10 @@ export const defaults = {
       id: 'f069a64d-01d0-449b-89c4-6fbe3571af64',
       name: 'MasterSpec'
     }
+  },
+  category: {
+    __typename: 'Category',
+    selected: ''
   }
 }
 
@@ -46,6 +47,10 @@ export const typeDefs = `{
   type Master {
     id: String!,
     name: String!
+  }
+
+  type Category {
+    selected: String!
   }
 }`
 /*
