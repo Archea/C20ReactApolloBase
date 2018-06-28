@@ -4,6 +4,7 @@ import { graphql, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 export class CategoryList extends Component {
+  selectCategory = id => {}
   render() {
     if (this.props.getState && this.props.getState.loading) {
       return <div>Loading</div>
@@ -14,7 +15,6 @@ export class CategoryList extends Component {
       return <div>Error</div>
     }
     const firmId = this.props.getState.userdata.firm.id
-    const selected = this.props.getState.category.selected
     //When we need teh activeCategory can use below (if not null...)
     return (
       <div className="CategoryList">
@@ -26,7 +26,12 @@ export class CategoryList extends Component {
             return (
               <div>
                 {data.allProductFamilyCategories.map(category => (
-                  <Category key={category.id} Category={category} />
+                  <Category
+                    key={category.id}
+                    Id={category.id}
+                    Category={category}
+                    Selected={category.id === data.category.selected}
+                  />
                 ))}
               </div>
             )
@@ -51,6 +56,9 @@ const CATAGORY_QUERY = gql`
       id
       name
     }
+    category @client {
+      selected
+    }
   }
 `
 
@@ -60,9 +68,6 @@ const INITIALSTATE_QUERY = gql`
       firm {
         id
       }
-    }
-    category @client {
-      selected
     }
   }
 `
