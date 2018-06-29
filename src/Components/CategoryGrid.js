@@ -3,8 +3,6 @@ import { graphql, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Category from './Category'
 
-import { Grid, GridColumn as Column } from '@progress/kendo-react-grid'
-
 export class CategoryGrid extends Component {
   render() {
     if (this.props.getState && this.props.getState.loading) {
