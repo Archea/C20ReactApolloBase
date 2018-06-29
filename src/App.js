@@ -5,6 +5,7 @@ import NotFound from './Components/Navigation/NotFound'
 import Welcome from './Components/Welcome'
 import CategoryList from './Components/CategoryList'
 import { Route, Switch } from 'react-router-dom'
+import '@progress/kendo-theme-default/dist/all.css'
 
 class App extends Component {
   render() {

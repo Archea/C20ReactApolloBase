@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import Category from './Category'
+import CategoryGrid from './CategoryGrid'
 import { graphql, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 export class CategoryList extends Component {
-  selectCategory = id => {}
   render() {
     if (this.props.getState && this.props.getState.loading) {
       return <div>Loading</div>
     }
 
     if (this.props.getState && this.props.getState.error) {
-      console.log('Get All Categories error: ' + this.props.getState.error)
+      console.log(
+        'Get Categories state error: ' + this.props.getState.error.message
+      )
       return <div>Error</div>
     }
     const firmId = this.props.getState.userdata.firm.id
@@ -22,29 +23,13 @@ export class CategoryList extends Component {
           {({ loading, error, data, client }) => {
             if (error) return `Error! ${error.message}`
             if (loading) return 'loading...'
-
-            return (
-              <div>
-                {data.allProductFamilyCategories.map(category => (
-                  <Category
-                    key={category.id}
-                    Id={category.id}
-                    Category={category}
-                    Selected={category.id === data.category.selected}
-                  />
-                ))}
-              </div>
-            )
+            return <CategoryGrid {...data} />
           }}
         </Query>
       </div>
     )
   }
 }
-
-//{data.allProductFamilyCategories.map(category => (
-//<Category key={category.id} Category={category} />
-//))}
 
 /*
 This query gets all the ProductFamilies aka sections from content20 db
@@ -55,9 +40,11 @@ const CATAGORY_QUERY = gql`
     allProductFamilyCategories(firmId: $firmId) {
       id
       name
-    }
-    category @client {
-      selected
+      discipline
+      firm {
+        name
+      }
+      selected @client
     }
   }
 `

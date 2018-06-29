@@ -7,8 +7,48 @@ export const resolvers = {
       const error = {
         error: { message: 'nobody implemented this' }
       }
+      const fragment = gql`
+        fragment setUser on UserData {
+          name
+          firm
+          master
+        }
+      `
+
       return error
+    },
+    // set item.selected
+    setCategoryGridItemSelected: (_, variables, { cache, getCacheKey }) => {
+      const fragmentId = getCacheKey({
+        __typename: 'ProductFamilyCategoryType',
+        id: variables.id
+      })
+      const fragment = gql`
+        fragment selectGridItem on ProductFamilyCategoryType {
+          selected
+        }
+      `
+      const category = cache.readFragment({ fragment, id: fragmentId })
+      cache.writeData({
+        id: fragmentId,
+        data: {
+          ...category,
+          selected: !category.selected
+        }
+      })
+      return category
+    },
+    //TODO set last selected index
+    setCategoryLastSelectedIndex: (_, variables, { cache, getCacheKey }) => {
+      cache.writeData({
+        categories: {
+          lastSelectedIndex: variables.index
+        }
+      })
     }
+  },
+  ProductFamilyCategoryType: {
+    selected: () => false
   }
 }
 export const defaults = {
@@ -26,9 +66,9 @@ export const defaults = {
       name: 'MasterSpec'
     }
   },
-  category: {
-    __typename: 'Category',
-    selected: ''
+  categories: {
+    __typename: 'Categories',
+    lastSelectedIndex: -1
   }
 }
 
@@ -49,9 +89,10 @@ export const typeDefs = `{
     name: String!
   }
 
-  type Category {
-    selected: String!
+  type Categories {
+    lastSelectedIndex: Number
   }
+
 }`
 /*
 masterId: String = null

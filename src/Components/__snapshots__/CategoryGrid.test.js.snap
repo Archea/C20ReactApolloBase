@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryGrid it at least shallow renders and match snapshot 1`] = `
+<div
+  className="CategoryGrid"
+>
+  <KendoReactGrid
+    data={
+      Array [
+        Object {
+          "discipline": "Architecture",
+          "firm": Object {
+            "name": "Avitru",
+          },
+          "id": "b686f1e0-16ca-4b40-bf17-a5269f3a1cec",
+          "name": "Administration",
+          "selected": false,
+        },
+      ]
+    }
+    headerSelectionValue={false}
+    onHeaderSelectionChange={[Function]}
+    onRowClick={[Function]}
+    onSelectionChange={[Function]}
+    selectedField="selected"
+  >
+    <GridColumn
+      field="name"
+      title="Category"
+    />
+    <GridColumn
+      field="discipline"
+      title="discipline"
+    />
+    <GridColumn
+      field="firm.name"
+      title="firm"
+    />
+    <GridColumn
+      field="selected"
+    />
+  </KendoReactGrid>
+</div>
+`;
+
+exports[`CategoryGrid it handles a query error 1`] = `
+<div>
+  Error
+</div>
+`;
+
+exports[`CategoryGrid it handles a query loading 1`] = `
+<div>
+  Loading
+</div>
+`;
