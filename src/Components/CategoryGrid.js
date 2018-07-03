@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Category from './Category'
+import './CategoryGrid.css'
 
 export class CategoryGrid extends Component {
   render() {

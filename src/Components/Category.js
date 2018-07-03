@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 
 export class Category extends Component {
   render() {
@@ -11,12 +12,12 @@ export class Category extends Component {
         mutation={TOGGLE_SELECTED}
         variables={{ id: this.props.Category.id }}>
         {toggleSelected => (
-          <button
+          <DefaultButton
             onClick={toggleSelected}
             className="Category"
             primary={this.props.Category.selected}>
             {this.props.Category.name}
-          </button>
+          </DefaultButton>
         )}
       </Mutation>
     )
