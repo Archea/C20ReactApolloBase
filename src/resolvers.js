@@ -17,18 +17,23 @@ export const resolvers = {
 
       return error
     },
-    // set item.selected
+    /*This resolver catches mucations to select property on the pfc type query
+      that are directed at the client.
+    */
     setCategoryGridItemSelected: (_, variables, { cache, getCacheKey }) => {
       const fragmentId = getCacheKey({
         __typename: 'ProductFamilyCategoryType',
         id: variables.id
       })
+
       const fragment = gql`
         fragment selectGridItem on ProductFamilyCategoryType {
           selected
         }
       `
+      //Get the category from the local cache
       const category = cache.readFragment({ fragment, id: fragmentId })
+      //Toggle the selected property and leave the rest of the category alone
       cache.writeData({
         id: fragmentId,
         data: {
@@ -37,20 +42,24 @@ export const resolvers = {
         }
       })
       return category
-    },
-    //TODO set last selected index
-    setCategoryLastSelectedIndex: (_, variables, { cache, getCacheKey }) => {
-      cache.writeData({
-        categories: {
-          lastSelectedIndex: variables.index
-        }
-      })
     }
   },
+  /*
+    This adds a seleced property to incoming pfcs
+    and sets it to false. This is needed because
+    the server scheme doesn't have any concept of 'selected'
+    we only need it for the client.
+  */
   ProductFamilyCategoryType: {
     selected: () => false
   }
 }
+/*
+  The is the initial state of the cache.
+  You can add items that are just needed for the client
+  or also hydrate the cache with defaults of data
+  that will be retrieved from the server
+*/
 export const defaults = {
   userdata: {
     __typename: 'UserData',
@@ -65,13 +74,13 @@ export const defaults = {
       id: 'f069a64d-01d0-449b-89c4-6fbe3571af64',
       name: 'MasterSpec'
     }
-  },
-  categories: {
-    __typename: 'Categories',
-    lastSelectedIndex: -1
   }
 }
-
+/*
+  These are only used at compile time but make
+  writing resolvers much cleaner and safer.
+  You can see them used above.
+*/
 export const typeDefs = `{
   type UserData {
     name: String!
@@ -88,13 +97,10 @@ export const typeDefs = `{
     id: String!,
     name: String!
   }
-
-  type Categories {
-    lastSelectedIndex: Number
-  }
-
 }`
 /*
+The server type definitions
+
 masterId: String = null
 The specification master whose content nuggets to retrieve.
 

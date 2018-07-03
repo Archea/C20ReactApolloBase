@@ -16,7 +16,6 @@ export class CategoryGrid extends Component {
       return <div>Error</div>
     }
 
-    const state = this.props.categories
     const categoriesToRender = this.props.allProductFamilyCategories
 
     return (
@@ -28,11 +27,14 @@ export class CategoryGrid extends Component {
     )
   }
 }
-
+/*
+  during a refactor this became useless but
+  leaving it here since it will become useful soon.
+*/
 const INITIALSTATE_QUERY = gql`
   query GetCategoryGridState {
-    categories @client {
-      lastSelectedIndex
+    userdata @client {
+      name
     }
   }
 `

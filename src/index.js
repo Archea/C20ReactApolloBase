@@ -17,10 +17,11 @@ const httpLink = new HttpLink({
 })
 
 const cache = new InMemoryCache()
-
+//bundle up all the stuff from resolvers for instantiation
 const stateLink = withClientState({ cache, defaults, resolvers, typeDefs })
 
 const client = new ApolloClient({
+  //This is the local/remote magic
   link: ApolloLink.from([stateLink, httpLink]),
   cache: new InMemoryCache()
 })

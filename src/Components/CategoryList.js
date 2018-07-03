@@ -48,7 +48,11 @@ const CATAGORY_QUERY = gql`
     }
   }
 `
-
+/*
+  firm id is needed for the queries
+  we pull it from the local userdata
+  on load with the HoC
+*/
 const INITIALSTATE_QUERY = gql`
   query GetInitSate {
     userdata @client {

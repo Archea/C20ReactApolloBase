@@ -21,12 +21,4 @@ describe('resolvers and defaults', () => {
     expect(defaults.userdata.master.id).toBeDefined()
     expect(defaults.userdata.master.id).toBeDefined()
   })
-  test('there is default categories data', () => {
-    expect(defaults.categories).toBeDefined()
-    expect(defaults.categories.lastSelectedIndex).toBeDefined()
-  })
-  test('the default categories selection is none or emptystring'),
-    () => {
-      expect(defaults.categories.lastSelectedIndex).toBe('-1')
-    }
 })
